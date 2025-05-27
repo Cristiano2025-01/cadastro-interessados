@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulário de Inscrição</title>
+</head>
+<body>
+  <h1>Inscreva-se para Terminar seus Estudos</h1>
+  <form id="leadForm">
+    <label>Nome: <input type="text" name="name" required></label><br><br>
+    <label>Email: <input type="email" name="email" required></label><br><br>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    document.getElementById("leadForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+
+      // Coloque sua URL do webhook do Make aqui:
+      const webhookURL = "https://hook.us2.make.com/hbk5664v9n4xj8zkhmxysange162od1o";
+
+      try {
+        const response = await fetch(webhookURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          alert("Obrigado por se inscrever!");
+          e.target.reset();
+        } else {
+          alert("Houve um problema ao enviar seus dados.");
+        }
+      } catch (error) {
+        alert("Erro ao enviar os dados: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
