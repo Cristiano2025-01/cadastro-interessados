@@ -1,15 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+  <meta charset="UTF-8">
   <title>Formulário de Inscrição</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0055a3;
+    }
+  </style>
 </head>
 <body>
-  <h1>Inscreva-se para Terminar seus Estudos</h1>
-  <form id="leadForm">
-    <label>Nome: <input type="text" name="name" required></label><br><br>
-    <label>Email: <input type="email" name="email" required></label><br><br>
-    <button type="submit">Enviar</button>
-  </form>
+  <div class="form-container">
+    <h1>Inscreva-se para Terminar seus Estudos</h1>
+    <form id="leadForm">
+      <label for="name">Nome:</label>
+      <input type="text" name="name" id="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="phone">Telefone:</label>
+      <input type="tel" name="phone" id="phone" required>
+
+      <label for="city">Cidade:</label>
+      <input type="text" name="city" id="city">
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
 
   <script>
     document.getElementById("leadForm").addEventListener("submit", async function(e) {
@@ -17,8 +84,7 @@
       const formData = new FormData(e.target);
       const data = Object.fromEntries(formData.entries());
 
-      // Coloque sua URL do webhook do Make aqui:
-      const webhookURL = "https://hook.us2.make.com/hbk5664v9n4xj8zkhmxysange162od1o";
+      const webhookURL = "https://hook.us2.make.com/hbk5664v9n4xj8zkhmxysange162od1o"; // <-- Substitua pela sua URL
 
       try {
         const response = await fetch(webhookURL, {
